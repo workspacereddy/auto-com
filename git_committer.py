@@ -3,10 +3,12 @@ import subprocess
 import datetime
 import time
 
+# HARDCODED values
+GIT_EMAIL = "workspacereddy@gmail.com"
+GIT_NAME = "workspacereddy"
+REPO_URL = "github.com/workspacereddy/auto-com.git"
+
 def setup_and_run_committer():
-    GIT_EMAIL = os.environ['GIT_EMAIL']
-    GIT_NAME = os.environ['GIT_NAME']
-    REPO_URL = os.environ['REPO_URL']
     TOKEN = os.environ['GITHUB_TOKEN']
 
     def setup_git():
@@ -36,5 +38,5 @@ def setup_and_run_committer():
     clone_repo()
     while True:
         commit_changes()
-        print("Committed successfully. Sleeping for 24 hours...")
-        time.sleep(24 * 60 * 60)
+        print("Committed successfully. Sleeping for 1 min...")
+        time.sleep(60)
