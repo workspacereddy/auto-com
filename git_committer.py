@@ -12,10 +12,6 @@ def setup_and_run_committer():
     TOKEN = os.environ['GITHUB_TOKEN']
 
     def setup_git():
-        with open(os.path.expanduser("~/.git-credentials"), "w") as cred:
-            cred.write(f"https://{TOKEN}:x-oauth-basic@github.com\n")
-
-        os.system("git config --global credential.helper store")
         os.system(f"git config --global user.email \"{GIT_EMAIL}\"")
         os.system(f"git config --global user.name \"{GIT_NAME}\"")
 
@@ -23,6 +19,10 @@ def setup_and_run_committer():
         if not os.path.exists("repo"):
             clone_url = f"https://{TOKEN}@{REPO_URL}"
             os.system(f"git clone {clone_url} repo")
+        # Update remote URL to ensure token is used for pushing
+        os.chdir("repo")
+        os.system(f"git remote set-url origin https://{TOKEN}@{REPO_URL}")
+        os.chdir("..")
 
     def commit_changes():
         os.chdir("repo")
@@ -38,5 +38,5 @@ def setup_and_run_committer():
     clone_repo()
     while True:
         commit_changes()
-        print("Committed successfully. Sleeping for 1 min...")
-        time.sleep(60)
+        print("✅ Committed successfully. Sleeping for 1 minute...")
+        time.sleep(60)  # Use 86400 for 24-hour interval
