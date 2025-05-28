@@ -17,10 +17,10 @@ def setup_and_run_committer():
 
     def clone_repo():
         if not os.path.exists("repo"):
-            clone_url = f"https://x-access-token:{TOKEN}@{REPO_URL}"
+            clone_url = f"https://workspacereddy:{TOKEN}@{REPO_URL}"
             os.system(f"git clone {clone_url} repo")
         os.chdir("repo")
-        os.system(f"git remote set-url origin https://x-access-token:{TOKEN}@{REPO_URL}")
+        os.system(f"git remote set-url origin https://workspacereddy:{TOKEN}@{REPO_URL}")
         os.chdir("..")
 
     def commit_changes():
