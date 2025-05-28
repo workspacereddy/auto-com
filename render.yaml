@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: github-auto-committer
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port 8080"
+    envVars:
+      - key: GIT_EMAIL
+        value: workspacereddy@gmail.com
+      - key: GIT_NAME
+        value: workspacereddy
+      - key: REPO_URL
+        value: github.com/workspacereddy/auto-com.git
+      - key: GITHUB_TOKEN
+        value: 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
